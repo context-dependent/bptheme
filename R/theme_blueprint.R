@@ -321,7 +321,7 @@ scale_fill_blueprint <- function(discrete = FALSE, ...) {
 
     discrete_palette <- blueprint_discrete_palette()
 
-    res <- scale_fill_manual(values = discrete_palette, ...)
+    res <- scale_fill_manual(values = discrete_palette$hex_code, ...)
   }
 
   res
