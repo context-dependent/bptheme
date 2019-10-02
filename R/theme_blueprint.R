@@ -38,6 +38,7 @@ theme_blueprint <- function(base_family="Segoe UI Semilight", base_size = 11.5,
                         plot_title_family="Segoe UI Semilight", plot_title_size = 18,
                         plot_title_face = "plain",
                         plot_title_margin = 10,
+                        plot_title_position = "plot",
                         subtitle_family="Consolas", subtitle_size = 12,
                         subtitle_face = "plain", subtitle_margin = 15,
                         subtitle_color = "grey60",
@@ -275,7 +276,8 @@ theme_blueprint <- function(base_family="Segoe UI Semilight", base_size = 11.5,
   )
 
   ret <- ret + theme(
-    plot.margin = plot_margin
+    plot.margin = plot_margin,
+    plot.title.position = plot_title_position
   )
 
   ret
