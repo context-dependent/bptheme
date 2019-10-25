@@ -330,6 +330,24 @@ scale_fill_blueprint <- function(discrete = FALSE, ...) {
 }
 
 
+
+#' Make it bolder
+#'
+#' @param ...
+#'
+#' @return
+#' @export
+#'
+#' @examples
+scale_fill_blueprint_bold <- function(...) {
+
+  res <- scale_fill_manual(values = blueprint_discrete_palette_bold()$hex_code, ...)
+
+  res
+
+}
+
+
 #' Return Blueprint discrete palette
 #'
 #' @return
@@ -347,6 +365,19 @@ blueprint_discrete_palette <- function() {
     "cool_2",  155, 185, 220,  "#9BB9DC",
     "green_2", 175, 190, 130,  "#AFBE82",
     "warm_3",  220, 150, 110,  "#DC966E"
+  )
+
+}
+
+
+blueprint_discrete_palette_bold <- function() {
+
+  tibble::tribble(
+    ~ name,        ~ r, ~ g,  ~ b, ~ hex_code,
+    "dark_slate",   75, 105,  145,  "#4B6991",
+    "tomato",      225, 135,   25,  "#E18719",
+    "light_green", 193, 213,  103,  "#C1D567",
+    "dark_grey",   127, 127,  127,  "#7F7F7F"
   )
 
 }
