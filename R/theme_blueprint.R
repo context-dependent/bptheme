@@ -53,6 +53,8 @@ theme_blueprint <- function(base_family="Segoe UI Semilight", base_size = 11.5,
                         grid_col = "grey50", grid = TRUE,
                         axis_col = "grey30", axis = TRUE, ticks = FALSE) {
 
+  load_fonts()
+
   ret <- ggplot2::theme_minimal(
     base_family = base_family,
     base_size = base_size
@@ -381,6 +383,26 @@ blueprint_discrete_palette_bold <- function() {
   )
 
 }
+
+load_fonts <- function() {
+
+  if(!fonts_are_loaded()) {
+    extrafont::font_import(pattern = "segoeuisl|consola.ttf")
+  }
+
+  extrafont::loadfonts(device = "pdf", quiet = TRUE)
+  extrafont::loadfonts(device = "win", quiet = TRUE)
+  extrafont::loadfonts(device = "postscript", quiet = TRUE)
+}
+
+fonts_are_loaded <- function() {
+  fonts <- extrafont::fonts()
+  res <- "Segoe UI Semilight" %in% fonts & "Consolas" %in% fonts
+
+  res
+}
+
+
 
 #
 #
