@@ -4,11 +4,13 @@
 \name{font_an}
 \alias{font_an}
 \title{Segoe UI Semilight font name R variable aliases}
-\format{length 1 character vector}
+\format{
+length 1 character vector
+}
 \usage{
 font_an
 }
 \description{
-\code{font_an} == "\code{Segoe UI Semilight}"
+\code{font_an} == "\verb{Segoe UI Semilight}"
 }
 \keyword{datasets}

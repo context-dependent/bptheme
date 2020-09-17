@@ -311,6 +311,7 @@ font_an <- "Segoe UI Semilight"
 #' Fill continuous or discrete mappings with Blueprint palettes
 #'
 #' @param discrete
+#' @param palette discrete palette to be used
 #' @param ...
 #'
 #' @return

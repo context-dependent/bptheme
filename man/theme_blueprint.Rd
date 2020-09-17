@@ -4,22 +4,44 @@
 \alias{theme_blueprint}
 \title{Theme a ggplot according to Blueprint-ADE corporate standards}
 \usage{
-theme_blueprint(base_family = "Segoe UI Semilight", base_size = 11.5,
-  plot_title_family = "Segoe UI Semilight", plot_title_size = 18,
-  plot_title_face = "plain", plot_title_margin = 10,
-  subtitle_family = "Consolas", subtitle_size = 12,
-  subtitle_face = "plain", subtitle_margin = 15,
-  subtitle_color = "grey60", strip_text_family = base_family,
-  strip_text_size = 12, strip_text_face = "plain",
-  caption_family = base_family, caption_size = 9, caption_face = "italic",
-  caption_margin = 10, axis_text_size = base_size,
-  axis_title_family = base_family, axis_title_size = base_size,
-  axis_title_face = "plain", axis_title_just = "rt",
-  plot_margin = margin(30, 30, 30, 30), grid_col = "grey50", grid = TRUE,
-  axis_col = "grey30", axis = TRUE, ticks = FALSE)
+theme_blueprint(
+  base_family = "Segoe UI Semilight",
+  base_size = 11.5,
+  plot_title_family = "Segoe UI Semilight",
+  plot_title_size = 18,
+  plot_title_face = "plain",
+  plot_title_margin = 10,
+  plot_title_position = "plot",
+  subtitle_family = "Consolas",
+  subtitle_size = 12,
+  subtitle_face = "plain",
+  subtitle_margin = 15,
+  subtitle_color = "grey60",
+  strip_text_family = base_family,
+  strip_text_size = 12,
+  strip_text_face = "plain",
+  caption_family = base_family,
+  caption_size = 9,
+  caption_face = "italic",
+  caption_margin = 10,
+  axis_text_size = base_size,
+  axis_title_family = base_family,
+  axis_title_size = base_size,
+  axis_title_face = "plain",
+  axis_title_just = "rt",
+  plot_margin = margin(30, 30, 30, 30),
+  grid_col = "grey50",
+  grid = TRUE,
+  axis_col = "grey30",
+  axis = TRUE,
+  ticks = FALSE
+)
 }
 \arguments{
 \item{ticks}{}
+}
+\value{
+
 }
 \description{
 Theme a ggplot according to Blueprint-ADE corporate standards
