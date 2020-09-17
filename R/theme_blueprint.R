@@ -317,13 +317,19 @@ font_an <- "Segoe UI Semilight"
 #' @export
 #'
 #' @examples
-scale_fill_blueprint <- function(discrete = FALSE, ...) {
+scale_fill_blueprint <- function(discrete = FALSE, palette = "default", ...) {
 
   if(!discrete) {
     res <- viridis::scale_fill_viridis(option = "cividis", ...)
   } else {
 
-    discrete_palette <- blueprint_discrete_palette()
+    if(palette == "default") {
+      discrete_palette <- blueprint_discrete_palette()
+    } else if(palette == "bold") {
+      discrete_palette <- blueprint_discrete_palette_bold()
+    } else {
+      stop("Invalid palette option selected")
+    }
 
     res <- scale_fill_manual(values = discrete_palette$hex_code, ...)
   }
