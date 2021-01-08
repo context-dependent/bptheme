@@ -5,7 +5,7 @@
 \title{Update matching font defaults for text geoms}
 \usage{
 update_geom_font_defaults(
-  family = "Segoe UI Semilight",
+  family = "Arial",
   face = "plain",
   size = 3.5,
   color = "#2b2b2b"
