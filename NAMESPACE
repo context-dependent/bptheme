@@ -2,9 +2,11 @@
 
 export("%>%")
 export(blueprint_discrete_palette)
+export(blueprint_discrete_palette_bold)
 export(font_an)
 export(scale_fill_blueprint)
 export(scale_fill_blueprint_bold)
 export(theme_blueprint)
+export(theme_blueprint_2021)
 export(update_geom_font_defaults)
 importFrom(magrittr,"%>%")
