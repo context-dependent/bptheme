@@ -351,7 +351,7 @@ theme_blueprint_2021 <- function(base_family="Arial", base_size = 11.5,
 
   ret <- ret + theme(
     legend.background = element_blank(),
-    plot.background = element_rect(fill = plot_background_colour, colour = NA)
+    plot.background = element_rect(fill = plot_background_colour, colour = plot_background_colour)
   )
 
   ret <- ret + theme(legend.key=element_blank())
