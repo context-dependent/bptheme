@@ -2,7 +2,7 @@
 % Please edit documentation in R/blueprint_pal.R
 \name{blueprint_pal}
 \alias{blueprint_pal}
-\title{blueprint_pal()}
+\title{The blueprint_pal() function, to return a vector of colours to be fed to discrete_scale() or continuous_scale()}
 \usage{
 blueprint_pal(
   palette = primary_brand_colours,
