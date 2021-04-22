@@ -572,10 +572,15 @@ theme_blueprint_2021 <- function(base_family="Arial", base_size = 11.5,
     plot.title.position = plot_title_position
   )
 
+  if("GT Flexa" %in% fonts()){
+    ret <- ret + theme(plot.title = element_text(size = plot_title_size, family = "GT Flexa"))
+  }else{
+    ret <- ret + theme(plot.title = element_text(size = plot_title_size, family = "Ariel"))
+  }
+
   ret
 
 }
-
 
 #' Update matching font defaults for text geoms
 #'
@@ -723,7 +728,7 @@ blueprint_discrete_palette_bold <- function() {
 load_fonts <- function() {
 
   if(!fonts_are_loaded()) {
-    extrafont::font_import(pattern = "segoeuisl|consola.ttf|rial")
+    extrafont::font_import(pattern = "segoeuisl|consola.ttf|rial|GT Flexa")
   }
 
   extrafont::loadfonts(device = "pdf", quiet = TRUE)
@@ -733,7 +738,7 @@ load_fonts <- function() {
 
 fonts_are_loaded <- function() {
   fonts <- extrafont::fonts()
-  res <- "Segoe UI Semilight" %in% fonts & "Consolas" %in% fonts & "Arial" %in% fonts
+  res <- "Segoe UI Semilight" %in% fonts & "Consolas" %in% fonts & "Arial" %in% fonts  & "GT Flexa" %in% fonts
 
   res
 }
