@@ -1,14 +1,15 @@
 #' display_blueprint_all
 #'
-#' This function displays all of the Blueprint palletes
-#' drawn from the offical corporate style guide
+#' This function displays all of the Blueprint palettes
+#' drawn from the official corporate style guide
 #'
 #' @export
 #'
-display_blueprint_all <- function(){
+display_blueprint_palettes <- function(){
+
   reformat_palette <- function(palette) {
-    palette <- as_tibble(palette)
-    palette <- pivot_longer(palette, everything())
+    palette <- tibble::as_tibble(palette)
+    palette <- tidyr::pivot_longer(palette, everything())
   }
 
   palette_names <- rev(
@@ -26,23 +27,25 @@ display_blueprint_all <- function(){
   )
 
   palette_list <-
-    rev(list(
-      nest(reformat_palette(primary_brand_colours), data = everything()),
-      nest(reformat_palette(blueprint_blues), data = everything()),
-      nest(reformat_palette(blueprint_greys), data = everything()),
-      nest(reformat_palette(blueprint_corals), data = everything()),
-      nest(reformat_palette(blueprint_greens), data = everything()),
-      nest( reformat_palette(blueprint_discrete_palette_multi), data = everything()),
-      nest(reformat_palette(blueprint_discrete_palette), data = everything()),
-      nest(reformat_palette(blueprint_discrete_palette_bold), data = everything()),
-      nest(reformat_palette(blueprint_discrete_palette_rbg), data = everything())
-    ))
+    rev(
+      list(
+        tidyr::nest(reformat_palette(primary_brand_colours), data = everything()),
+        tidyr::nest(reformat_palette(blueprint_blues), data = everything()),
+        tidyr::nest(reformat_palette(blueprint_greys), data = everything()),
+        tidyr::nest(reformat_palette(blueprint_corals), data = everything()),
+        tidyr::nest(reformat_palette(blueprint_greens), data = everything()),
+        tidyr::nest(reformat_palette(blueprint_discrete_palette_multi), data = everything()),
+        tidyr::nest(reformat_palette(blueprint_discrete_palette), data = everything()),
+        tidyr::nest(reformat_palette(blueprint_discrete_palette_bold), data = everything()),
+        tidyr::nest(reformat_palette(blueprint_discrete_palette_rbg), data = everything())
+      )
+    )
 
   for (i in 1:2) {                                    # this for-loop solves an issue where the visual only renders correctly the second time you call the function
     number_of_palettes <- length(palette_names)
     ylim <- c(0, number_of_palettes)
 
-    length(unnest(palette_list[1][[1]], cols = c(1)))
+    length(tidyr::unnest(palette_list[1][[1]], cols = c(1)))
 
     plot(
       1,
@@ -59,7 +62,7 @@ display_blueprint_all <- function(){
     par(mar = c(1, 12, 1, 1))
 
     for (i in 1:number_of_palettes) {
-      nj <- unnest(palette_list[i][[1]], cols = c(1))
+      nj <- tidyr::unnest(palette_list[i][[1]], cols = c(1))
 
       rect(
         xleft = 1:nrow(nj) - 1,
@@ -80,5 +83,3 @@ display_blueprint_all <- function(){
     }
   }
 }
-
-display_blueprint_all()
