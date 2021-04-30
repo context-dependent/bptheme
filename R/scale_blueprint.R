@@ -58,7 +58,7 @@ scale_colour_blueprint_c <- function(...,
   continuous_scale(
     aesthetics,
     "blueprint_pal",
-    gradient_n_pal(
+    scales::gradient_n_pal(
       blueprint_pal(palette = palette, direction = direction)(4),
       values,
       space),
@@ -88,7 +88,7 @@ scale_fill_blueprint_c <- function(...,
   continuous_scale(
     aesthetics,
     "blueprint_pal",
-    gradient_n_pal(
+    scales::gradient_n_pal(
       blueprint_pal(palette = palette, direction = direction)(4),
       values,
       space),
