@@ -1,5 +1,5 @@
 
-# fun Blueprint corporate palettes
+# fun Blueprint corporate palettes!
 
 primary_brand_colours <- list(
   "black"   = "#000000",

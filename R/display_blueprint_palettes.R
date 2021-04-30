@@ -5,6 +5,7 @@
 #'
 #' @export
 #'
+
 display_blueprint_palettes <- function(){
 
   reformat_palette <- function(palette) {
@@ -83,3 +84,4 @@ display_blueprint_palettes <- function(){
     }
   }
 }
+
