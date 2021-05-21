@@ -572,7 +572,7 @@ theme_blueprint_2021 <- function(base_family="Arial", base_size = 11.5,
     plot.title.position = plot_title_position
   )
 
-  if("GT Flexa" %in% fonts()){
+  if("GT Flexa" %in% extrafont::fonts()){
     ret <- ret + theme(plot.title = element_text(size = plot_title_size, family = "GT Flexa"))
   }else{
     ret <- ret + theme(plot.title = element_text(size = plot_title_size, family = "Ariel"))
