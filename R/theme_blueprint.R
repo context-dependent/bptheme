@@ -572,10 +572,15 @@ theme_blueprint_2021 <- function(base_family="Arial", base_size = 11.5,
     plot.title.position = plot_title_position
   )
 
+  if("GT Flexa" %in% extrafont::fonts()){
+    ret <- ret + theme(plot.title = element_text(size = plot_title_size, family = "GT Flexa"))
+  }else{
+    ret <- ret + theme(plot.title = element_text(size = plot_title_size, family = "Ariel"))
+  }
+
   ret
 
 }
-
 
 #' Update matching font defaults for text geoms
 #'
@@ -658,72 +663,72 @@ scale_fill_blueprint_bold <- function(...) {
 
 }
 
-blueprint_discrete_palette_blues <- function() {
-  tibble::tribble(
-    ~ name,   ~ r, ~ g,  ~ b, ~ hex_code,
-    "blue_0",   0,   0,  255,  "#0000FF",
-    "blue_1",   0, 127,  255,  "#007FFF",
-    "blue_2", 135, 206,  250,  "#87CEFA",
-    "blue_3", 207, 248,  255,  "#CFF8FF",
-    "blue_4", 240, 255,  255,  "#F0FFFF",
-    "white" , 255, 255,  255,  "#FFFFFF"
-  )
-}
-
-blueprint_discrete_palette_multi <- function() {
-  tibble::tribble(
-     ~ name,   ~ r, ~ g,  ~ b, ~ hex_code,
-     "blue",   0,   0,  255,  "#0000FF",
-    "coral", 255,  69,    0,  "#FF4500",
-    "green",   0, 207,    0,  "#00CF97"
-  )
-}
-
-
-#' Return Blueprint discrete palette
-#'
-#' @return
-#' @export
-#'
-#' @examples
-blueprint_discrete_palette <- function() {
-
-  tibble::tribble(
-    ~ name,   ~ r, ~ g,  ~ b, ~ hex_code,
-    "warm_1",  255, 235, 130,  "#FFEB82",
-    "cool_1",  210, 230, 245,  "#D2E6F5",
-    "green_1", 220, 230, 130,  "#DCE682",
-    "warm_2",  250, 190, 120,  "#FABE78",
-    "cool_2",  155, 185, 220,  "#9BB9DC",
-    "green_2", 175, 190, 130,  "#AFBE82",
-    "warm_3",  220, 150, 110,  "#DC966E"
-  )
-
-}
-
-
-#' Return Blueprint discrete palette bold
-#'
-#' @return
-#' @export
-#'
-#' @examples
-blueprint_discrete_palette_bold <- function() {
-
-  tibble::tribble(
-    ~ name,        ~ r, ~ g,  ~ b, ~ hex_code,
-    "dark_slate",   75, 105,  145,  "#4B6991",
-    "tomato",      225, 135,   25,  "#E18719",
-    "light_green", 193, 213,  103,  "#C1D567",
-    "dark_grey",   127, 127,  127,  "#7F7F7F"
-  )
-
-}
-
+#blueprint_discrete_palette_blues <- function() {
+#  tibble::tribble(
+#    ~ name,   ~ r, ~ g,  ~ b, ~ hex_code,
+#    "blue_0",   0,   0,  255,  "#0000FF",
+#    "blue_1",   0, 127,  255,  "#007FFF",
+#    "blue_2", 135, 206,  250,  "#87CEFA",
+#    "blue_3", 207, 248,  255,  "#CFF8FF",
+#    "blue_4", 240, 255,  255,  "#F0FFFF",
+#    "white" , 255, 255,  255,  "#FFFFFF"
+#  )
+#}
+#
+#blueprint_discrete_palette_multi <- function() {
+#  tibble::tribble(
+#     ~ name,   ~ r, ~ g,  ~ b, ~ hex_code,
+#     "blue",   0,   0,  255,  "#0000FF",
+#    "coral", 255,  69,    0,  "#FF4500",
+#    "green",   0, 207,    0,  "#00CF97"
+#  )
+#}
+#
+#
+##' Return Blueprint discrete palette
+##'
+##' @return
+##' @export
+##'
+##' @examples
+#blueprint_discrete_palette <- function() {
+#
+#  tibble::tribble(
+#    ~ name,   ~ r, ~ g,  ~ b, ~ hex_code,
+#    "warm_1",  255, 235, 130,  "#FFEB82",
+#    "cool_1",  210, 230, 245,  "#D2E6F5",
+#    "green_1", 220, 230, 130,  "#DCE682",
+#    "warm_2",  250, 190, 120,  "#FABE78",
+#    "cool_2",  155, 185, 220,  "#9BB9DC",
+#    "green_2", 175, 190, 130,  "#AFBE82",
+#    "warm_3",  220, 150, 110,  "#DC966E"
+#  )
+#
+#}
+#
+#
+##' Return Blueprint discrete palette bold
+##'
+##' @return
+##' @export
+##'
+##' @examples
+#blueprint_discrete_palette_bold <- function() {
+#
+#  tibble::tribble(
+#    ~ name,        ~ r, ~ g,  ~ b, ~ hex_code,
+#    "dark_slate",   75, 105,  145,  "#4B6991",
+#    "tomato",      225, 135,   25,  "#E18719",
+#    "light_green", 193, 213,  103,  "#C1D567",
+#    "dark_grey",   127, 127,  127,  "#7F7F7F"
+#  )
+#
+#}
+#
 load_fonts <- function() {
 
   if(!fonts_are_loaded()) {
-    extrafont::font_import(pattern = "segoeuisl|consola.ttf|rial")
+    extrafont::font_import(pattern = "segoeuisl|consola.ttf|rial|GT Flexa")
   }
 
   extrafont::loadfonts(device = "pdf", quiet = TRUE)
@@ -733,7 +738,7 @@ load_fonts <- function() {
 
 fonts_are_loaded <- function() {
   fonts <- extrafont::fonts()
-  res <- "Segoe UI Semilight" %in% fonts & "Consolas" %in% fonts & "Arial" %in% fonts
+  res <- "Segoe UI Semilight" %in% fonts & "Consolas" %in% fonts & "Arial" %in% fonts  & "GT Flexa" %in% fonts
 
   res
 }

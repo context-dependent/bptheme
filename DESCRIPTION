@@ -16,4 +16,10 @@ Imports:
     tibble,
     dplyr,
     purrr,
-    ggplot2
+    ggplot2,
+    scales,
+    tidyr,
+    extrafont
+Depends: 
+    R (>= 2.10)
+
