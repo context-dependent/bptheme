@@ -5,15 +5,13 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
-ragg_png <- function(..., res = 500) {
-  ragg::agg_png(..., res = res, units = "in")
-}
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  dev = "ragg_png",
+  dpi = 192,
+  dev.args = list(type = "cairo"),
   fig.ext = "png"
 )
 ```
