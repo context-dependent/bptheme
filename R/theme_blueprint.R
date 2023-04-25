@@ -1,771 +1,371 @@
-#' Theme a ggplot according to Blueprint-ADE legacy corporate standards
+#' Flexible theme with sensible defaults for Blueprint-branded
+#' plots
 #'
 #' @param base_family
+#'   Character String indicating the default font family for text on the plot.
 #' @param base_size
+#'   Number indicating the default point size for text on the plot.
 #' @param plot_title_family
+#'   Character String indicating the font family for the plot's title.
 #' @param plot_title_size
+#'   Number indicating the point size for the plot's title.
 #' @param plot_title_face
+#'   Character String specifying the font face (e.g. "bold", "semibold")
+#'   for the plot's title.
 #' @param plot_title_margin
+#'   Number indicating the pixel size of the margin around the plot's title.
 #' @param subtitle_family
+#'   Character String indicating the font family for the plot's subtitle.
 #' @param subtitle_size
+#'   Number indicating the point size of the plot's subtitle.
 #' @param subtitle_face
+#'   Character String specifying the font face (e.g. "bold", "semibold")
+#'   for the plot's subtitle.
 #' @param subtitle_margin
+#'   Number indicating the pixel size of the margin around the plot's subtitle.
 #' @param subtitle_color
+#'   Character String specifying the color for the plot's subtitle.
 #' @param strip_text_family
+#'   Character String indicating the font family for the plot's facet labels.
 #' @param strip_text_size
+#'   Number indicating the point size for the plot's facet labels.
 #' @param strip_text_face
+#'   Character String specifying the font face (e.g. "bold", "semibold")
+#'   for the plot's facet labels.
 #' @param caption_family
+#'   Character String indicating the font family for the plot's caption.
 #' @param caption_size
+#'   Number indicating the point size for the plot's caption.
 #' @param caption_face
+#'   Character String specifying the font face (e.g. "bold", "semibold")
+#'   for the plot's caption.
 #' @param caption_margin
+#'   Number indicating the pixel size of the margin around the plot's caption.
 #' @param axis_text_size
+#'   Number indicating the point size for the plot's axis text.
 #' @param axis_title_family
+#'   Character String indicating the font family for the plot's axis title(s).
 #' @param axis_title_size
+#'   Number indicating the point size for the plot's axis title(s).
 #' @param axis_title_face
+#'   Character String specifying the font face (e.g. "bold", "semibold")
+#'   for the plot's title.
 #' @param axis_title_just
+#'   Two-Character String indicating justification for the plots axis title(s).
+#'   The first character controls x axis, while the second controls y.
+#'   Each character can be one of the following:
+#'   \itemize{
+#'     \item "r" right justify the axis title
+#'     \item "l" left justify the axis title
+#'     \item "c" center justify the axis title
+#'     \item "t" top justify the axis title if it is vertically oriented
+#'     \item "b" bottom justify the axis title if it is vertically oriented
+#'     \item "m" middle justify the axis title if it is vertically oriented
+#'   }
 #' @param plot_margin
+#'   Number indicating the margin in pixels around the plot's content
 #' @param grid_col
+#'   Character String specifying the colour of the grid
 #' @param grid
+#'   Character String (up to 4 characters from "XxYy") or Logical alias
+#'   which toggles major and minor gridlines.
+#'
+#'   Behavior depends on which characters among "XxYy" are in the string:
+#'   \itemize{
+#'     \item "X" include major vertical gridlines
+#'     \item "x" include minor vertical gridlines
+#'     \item "Y" include major horizontal gridlines
+#'     \item "y" include minor horizontal gridlines
+#'   }
+#'
+#'   Logical aliases:
+#'   \itemize{
+#'     \item TRUE is "XxYy"
+#'     \item FALSE is ""
+#'   }
 #' @param axis_col
+#'   Character String indicating the colour of the axis lines
 #' @param axis
+#'   Character String (up to 2 from "xy") or Logical alias
+#'   which toggles axis lines.
+#'
+#'   One of:
+#'   \itemize{
+#'     \item "xy" or TRUE draw both x and y axis lines
+#'     \item "x" draw x axis line but not y
+#'     \item "y" draw y axis line but not x
+#'     \item "" or FALSE don't draw axis lines
+#'   }
 #' @param ticks
+#'   Logical if TRUE, draw ticks for each break in the x and y axes.
 #'
 #' @return
-#' @export
+#'   \code{theme_blueprint} returns a ggplot2 theme object
 #'
-#' @examples
-theme_blueprint <- function(base_family="Segoe UI Semilight", base_size = 11.5,
-                        plot_title_family="Segoe UI Semilight", plot_title_size = 18,
-                        plot_title_face = "plain",
-                        plot_title_margin = 10,
-                        plot_title_position = "plot",
-                        subtitle_family="Consolas", subtitle_size = 12,
-                        subtitle_face = "plain", subtitle_margin = 15,
-                        subtitle_color = "grey60",
-                        strip_text_family = base_family, strip_text_size = 12,
-                        strip_text_face = "plain",
-                        caption_family = base_family, caption_size = 9,
-                        caption_face = "italic", caption_margin = 10,
-                        axis_text_size = base_size,
-                        axis_title_family = base_family, axis_title_size = base_size,
-                        axis_title_face = "plain", axis_title_just = "rt",
-                        plot_margin = margin(30, 30, 30, 30),
-                        grid_col = "grey50", grid = TRUE,
-                        axis_col = "grey30", axis = TRUE, ticks = FALSE) {
-
-  load_fonts()
-
-  ret <- ggplot2::theme_minimal(
-    base_family = base_family,
-    base_size = base_size
-  )
-
-  ret <- ret + theme(
-    legend.background = element_blank()
-  )
-
-  ret <- ret + theme(legend.key=element_blank())
-  ret <- ret + theme(legend.position = "bottom")
-
-  # Grid
-  if (inherits(grid, "character") | grid == TRUE) {
-
-    ret <- ret + theme(
-      panel.grid = element_line(
-        color = grid_col,
-        size  = 0.1
-      )
+#' @export
+theme_blueprint <- function(
+    base_family = "Arial", base_size = 11.5,
+    plot_title_family = "GT Flexa", plot_title_size = 18,
+    plot_title_face = "plain",
+    plot_title_margin = 10,
+    plot_title_position = "plot",
+    plot_background_color = "#E6E6E6",
+    subtitle_family = "Consolas", subtitle_size = 12,
+    subtitle_face = "plain", subtitle_margin = 15,
+    subtitle_color = "grey60",
+    strip_text_family = base_family, strip_text_size = 12,
+    strip_text_face = "plain",
+    caption_family = base_family, caption_size = 9,
+    caption_face = "italic", caption_margin = 10,
+    axis_text_size = base_size,
+    axis_title_family = base_family, axis_title_size = base_size,
+    axis_title_face = "plain", axis_title_just = "rt",
+    plot_margin = ggplot2::margin(30, 30, 30, 30),
+    grid_col = "grey50", grid = TRUE,
+    axis_col = "grey30", axis = TRUE, ticks = FALSE) {
+    ret <- base_theme(base_family, base_size, plot_background_color)
+    ret <- ret + style_grid(grid, grid_col)
+    ret <- ret + style_axes(
+        axis,
+        axis_text_size,
+        axis_title_family,
+        axis_title_size,
+        axis_title_face,
+        axis_title_just,
+        axis_col,
+        ticks
+    )
+    ret <- ret + style_labels(
+        plot_title_family,
+        plot_title_size,
+        plot_title_face,
+        plot_title_margin,
+        plot_title_position,
+        subtitle_family,
+        subtitle_size,
+        subtitle_face,
+        subtitle_margin,
+        subtitle_color,
+        strip_text_family,
+        strip_text_size,
+        strip_text_face,
+        caption_family,
+        caption_size,
+        caption_face,
+        caption_margin,
+        plot_margin
     )
 
-    ret <- ret + theme(
-      panel.grid.major = element_line(
-        color = grid_col,
-        size  = 0.2
-      )
+    ret
+}
+
+#' @rdname theme_blueprint
+base_theme <- function(base_family, base_size, plot_background_color) {
+    ggplot2::theme_minimal(
+        base_family = base_family,
+        base_size = base_size
+    ) +
+        ggplot2::theme(
+            plot.background = ggplot2::element_rect(
+                fill = plot_background_color,
+                colour = plot_background_color
+            ),
+            panel.spacing = grid::unit(0.5, "lines")
+        )
+}
+
+#' @rdname theme_blueprint
+style_labels <- function(
+    plot_title_family,
+    plot_title_size,
+    plot_title_face,
+    plot_title_margin,
+    plot_title_position,
+    subtitle_family,
+    subtitle_size,
+    subtitle_face,
+    subtitle_margin,
+    subtitle_color,
+    strip_text_family,
+    strip_text_size,
+    strip_text_face,
+    caption_family,
+    caption_size,
+    caption_face,
+    caption_margin,
+    plot_margin) {
+    # Facets
+    ret <- ggplot2::theme(
+        strip.text = ggplot2::element_text(
+            hjust  = 0,
+            size   = strip_text_size,
+            family = strip_text_family,
+            face   = strip_text_face
+        ),
+        strip.text.y = ggplot2::element_text(
+            angle = 0
+        ),
+        strip.text.y.left = ggplot2::element_text(
+            angle = 0
+        )
     )
 
-    ret <- ret + theme(
-      panel.grid.minor = element_line(
+    # Labels
+    ret <- ret + ggplot2::theme(
+        plot.title = ggplot2::element_text(
+            hjust  = 0,
+            size   = plot_title_size,
+            margin = ggplot2::margin(b = plot_title_margin),
+            family = plot_title_family,
+            face   = plot_title_face
+        ),
+        plot.subtitle = ggplot2::element_text(
+            hjust  = 0,
+            size   = subtitle_size,
+            margin = ggplot2::margin(b = subtitle_margin),
+            family = subtitle_family,
+            face   = subtitle_face,
+            color  = subtitle_color
+        ),
+        plot.caption = ggplot2::element_text(
+            hjust  = 1,
+            size   = caption_size,
+            margin = ggplot2::margin(t = caption_margin),
+            family = caption_family,
+            face   = caption_face
+        ),
+        plot.margin = plot_margin,
+        plot.title.position = plot_title_position
+    )
+
+    ret
+}
+
+#' @rdname theme_blueprint
+style_axes <- function(
+    axis,
+    axis_text_size,
+    axis_title_family,
+    axis_title_size,
+    axis_title_face,
+    axis_title_just,
+    axis_col, ticks) {
+    # Axis
+
+    ret <- ggplot2::theme(axis.line = ggplot2::element_blank())
+    axis_line <- ggplot2::element_line(linewidth = 0.15, color = axis_col)
+
+    if (axis == TRUE) {
+        ret <- ret + ggplot2::theme(
+            axis.line = axis_line
+        )
+    } else if (inherits(axis, "character")) {
+        if (grepl("x", axis)) {
+            ret <- ret + ggplot2::theme(axis.line.x = axis_line)
+        }
+        if (grepl("y", axis)) {
+            ret <- ret + ggplot2::theme(axis.line.y = axis_line)
+        }
+    }
+
+    if (!ticks) {
+        ret <- ret + ggplot2::theme(axis.ticks = ggplot2::element_blank())
+        ret <- ret + ggplot2::theme(axis.ticks.x = ggplot2::element_blank())
+        ret <- ret + ggplot2::theme(axis.ticks.y = ggplot2::element_blank())
+    } else {
+        ret <- ret + ggplot2::theme(axis.ticks = axis_line)
+        ret <- ret + ggplot2::theme(axis.ticks.x = axis_line)
+        ret <- ret + ggplot2::theme(axis.ticks.y = axis_line)
+        ret <- ret + ggplot2::theme(axis.ticks.length = grid::unit(5, "pt"))
+    }
+
+    xj <- switch(tolower(substr(axis_title_just, 1, 1)),
+        b = 0,
+        l = 0,
+        m = 0.5,
+        c = 0.5,
+        r = 1,
+        t = 1
+    )
+
+    yj <- switch(tolower(substr(axis_title_just, 2, 2)),
+        b = 0,
+        l = 0,
+        m = 0.5,
+        c = 0.5,
+        r = 1,
+        t = 1
+    )
+
+    # Axis
+    ret <- ret + ggplot2::theme(
+        axis.text.x = ggplot2::element_text(
+            size = axis_text_size,
+            margin = ggplot2::margin(t = 0)
+        ),
+        axis.text.y = ggplot2::element_text(
+            size = axis_text_size,
+            margin = ggplot2::margin(r = 0)
+        ),
+        axis.title = ggplot2::element_text(
+            size = axis_title_size,
+            family = axis_title_family
+        ),
+        axis.title.x = ggplot2::element_text(
+            hjust  = xj,
+            size   = axis_title_size,
+            family = axis_title_family,
+            face   = axis_title_face
+        ),
+        axis.title.y = ggplot2::element_text(
+            hjust  = yj,
+            size   = axis_title_size,
+            angle  = 90,
+            family = axis_title_family,
+            face   = axis_title_face
+        ),
+        axis.title.y.right = ggplot2::element_text(
+            hjust  = yj,
+            size   = axis_title_size,
+            angle  = 90,
+            family = axis_title_family,
+            face   = axis_title_face
+        )
+    )
+
+    ret
+}
+
+#' @rdname theme_blueprint
+style_grid <- function(grid, grid_col) {
+    minor <- ggplot2::element_line(
         linetype = 2,
-        color    = grid_col,
-        size     = 0.15
-      )
-    )
-
-    if (inherits(grid, "character")) {
-      if (regexpr("X", grid)[1] < 0) ret <- ret + theme(panel.grid.major.x=element_blank())
-      if (regexpr("Y", grid)[1] < 0) ret <- ret + theme(panel.grid.major.y=element_blank())
-      if (regexpr("x", grid)[1] < 0) ret <- ret + theme(panel.grid.minor.x=element_blank())
-      if (regexpr("y", grid)[1] < 0) ret <- ret + theme(panel.grid.minor.y=element_blank())
-    }
-
-  } else {
-    ret <- ret + theme(panel.grid=element_blank())
-  }
-
-
-  # Axis
-  if (inherits(axis, "character") | axis == TRUE) {
-
-    ret <- ret + theme(
-      axis.line = element_line(
-        color = "#2b2b2b",
-        size  = 0.15
-      )
-    )
-
-    if (inherits(axis, "character")) {
-      axis <- tolower(axis)
-      if (regexpr("x", axis)[1] < 0) {
-        ret <- ret + theme(
-          axis.line.x = element_blank()
-        )
-      } else {
-        ret <- ret + theme(
-          axis.line.x = element_line(
-            color = axis_col,
-            size  = 0.15
-          )
-        )
-      }
-      if (regexpr("y", axis)[1] < 0) {
-        ret <- ret + theme(
-          axis.line.y = element_blank()
-        )
-      } else {
-        ret <- ret + theme(
-          axis.line.y = element_line(
-            color = axis_col,
-            size  = 0.15
-          )
-        )
-      }
-    } else {
-      ret <- ret + theme(
-        axis.line.x = element_line(
-          color  = axis_col,
-          size   = 0.15
-        )
-      )
-
-      ret <- ret + theme(
-        axis.line.y = element_line(
-          color  = axis_col,
-          size   = 0.15
-        )
-      )
-    }
-  } else {
-    ret <- ret + theme(axis.line=element_blank())
-  }
-
-  if (!ticks) {
-    ret <- ret + theme(axis.ticks = element_blank())
-    ret <- ret + theme(axis.ticks.x = element_blank())
-    ret <- ret + theme(axis.ticks.y = element_blank())
-  } else {
-    ret <- ret + theme(axis.ticks = element_line(size=0.15))
-    ret <- ret + theme(axis.ticks.x = element_line(size=0.15))
-    ret <- ret + theme(axis.ticks.y = element_line(size=0.15))
-    ret <- ret + theme(axis.ticks.length = grid::unit(5, "pt"))
-  }
-
-  xj <- switch(
-    tolower(substr(axis_title_just, 1, 1)),
-    b=0, l=0, m=0.5, c=0.5, r=1, t=1
-  )
-
-  yj <- switch(
-    tolower(substr(axis_title_just, 2, 2)),
-    b=0, l=0, m=0.5, c=0.5, r=1, t=1
-  )
-
-  # Axis
-  ret <- ret + theme(
-    axis.text.x = element_text(
-      size = axis_text_size,
-      margin = margin(t=0)
-    )
-  )
-
-  ret <- ret + theme(
-    axis.text.y = element_text(
-      size = axis_text_size,
-      margin = margin(r=0)
-    )
-  )
-
-  ret <- ret + theme(
-    axis.title = element_text(
-      size = axis_title_size,
-      family = axis_title_family
-    )
-  )
-
-  ret <- ret + theme(
-    axis.title.x = element_text(
-      hjust  = xj,
-      size   = axis_title_size,
-      family = axis_title_family,
-      face   = axis_title_face
-    )
-  )
-
-  ret <- ret + theme(
-    axis.title.y = element_text(
-      hjust  = yj,
-      size   = axis_title_size,
-      angle  = 90,
-      family = axis_title_family,
-      face   = axis_title_face
-    )
-  )
-
-  ret <- ret + theme(
-    axis.title.y.right = element_text(
-      hjust  = yj,
-      size   = axis_title_size,
-      angle  = 90,
-      family = axis_title_family,
-      face   = axis_title_face
-    )
-  )
-
-  # Facets
-  ret <- ret + theme(
-    strip.text = element_text(
-      hjust  = 0,
-      size   = strip_text_size,
-      family = strip_text_family,
-      face   = strip_text_face
-    )
-  )
-
-  ret <- ret + theme(
-    panel.spacing = grid::unit(0.5, "lines")
-  )
-
-  # Labels
-  ret <- ret + theme(
-    plot.title = element_text(
-      hjust  = 0,
-      size   = plot_title_size,
-      margin = margin(b=plot_title_margin),
-      family = plot_title_family,
-      face   = plot_title_face
-    )
-  )
-
-  ret <- ret + theme(
-    plot.subtitle = element_text(
-      hjust  = 0,
-      size   = subtitle_size,
-      margin = margin(b=subtitle_margin),
-      family = subtitle_family,
-      face   = subtitle_face,
-      color  = subtitle_color
-    )
-  )
-
-  ret <- ret + theme(
-    plot.caption = element_text(
-      hjust  = 1,
-      size   = caption_size,
-      margin = margin(t=caption_margin),
-      family = caption_family,
-      face   = caption_face
-    )
-  )
-
-  ret <- ret + theme(
-    plot.margin = plot_margin,
-    plot.title.position = plot_title_position
-  )
-
-  ret
-
-}
-
-#' Theme a ggplot according to Blueprint-ADE legacy corporate standards
-#'
-#' @param base_family
-#' @param base_size
-#' @param plot_title_family
-#' @param plot_title_size
-#' @param plot_title_face
-#' @param plot_title_margin
-#' @param subtitle_family
-#' @param subtitle_size
-#' @param subtitle_face
-#' @param subtitle_margin
-#' @param subtitle_color
-#' @param strip_text_family
-#' @param strip_text_size
-#' @param strip_text_face
-#' @param caption_family
-#' @param caption_size
-#' @param caption_face
-#' @param caption_margin
-#' @param axis_text_size
-#' @param axis_title_family
-#' @param axis_title_size
-#' @param axis_title_face
-#' @param axis_title_just
-#' @param plot_margin
-#' @param grid_col
-#' @param grid
-#' @param axis_col
-#' @param axis
-#' @param ticks
-#'
-#' @return
-#' @export
-#'
-#' @examples
-theme_blueprint_2021 <- function(base_family="Arial", base_size = 11.5,
-                            plot_title_family="Arial", plot_title_size = 18,
-                            plot_title_face = "plain",
-                            plot_title_margin = 10,
-                            plot_title_position = "plot",
-                            plot_background_colour = "#E6E6E6",
-                            subtitle_family="Consolas", subtitle_size = 12,
-                            subtitle_face = "plain", subtitle_margin = 15,
-                            subtitle_color = "grey60",
-                            strip_text_family = base_family, strip_text_size = 12,
-                            strip_text_face = "plain",
-                            caption_family = base_family, caption_size = 9,
-                            caption_face = "italic", caption_margin = 10,
-                            axis_text_size = base_size,
-                            axis_title_family = base_family, axis_title_size = base_size,
-                            axis_title_face = "plain", axis_title_just = "rt",
-                            plot_margin = margin(30, 30, 30, 30),
-                            grid_col = "grey50", grid = TRUE,
-                            axis_col = "grey30", axis = TRUE, ticks = FALSE) {
-
-  load_fonts()
-
-  ret <- ggplot2::theme_minimal(
-    base_family = base_family,
-    base_size = base_size
-  )
-
-  ret <- ret + theme(
-    legend.background = element_blank(),
-    plot.background = element_rect(fill = plot_background_colour, colour = plot_background_colour)
-  )
-
-  ret <- ret + theme(legend.key=element_blank())
-  ret <- ret + theme(legend.position = "bottom")
-
-  # Grid
-  if (inherits(grid, "character") | grid == TRUE) {
-
-    ret <- ret + theme(
-      panel.grid = element_line(
         color = grid_col,
-        size  = 0.1
-      )
+        linewidth = 0.15
     )
-
-    ret <- ret + theme(
-      panel.grid.major = element_line(
+    major <- ggplot2::element_line(
         color = grid_col,
-        size  = 0.2
-      )
+        linewidth  = 0.2
     )
 
-    ret <- ret + theme(
-      panel.grid.minor = element_line(
-        linetype = 2,
-        color    = grid_col,
-        size     = 0.15
-      )
-    )
+    ret <- ggplot2::theme()
 
-    if (inherits(grid, "character")) {
-      if (regexpr("X", grid)[1] < 0) ret <- ret + theme(panel.grid.major.x=element_blank())
-      if (regexpr("Y", grid)[1] < 0) ret <- ret + theme(panel.grid.major.y=element_blank())
-      if (regexpr("x", grid)[1] < 0) ret <- ret + theme(panel.grid.minor.x=element_blank())
-      if (regexpr("y", grid)[1] < 0) ret <- ret + theme(panel.grid.minor.y=element_blank())
+    if (grid == TRUE) {
+        ret <- ret + ggplot2::theme(
+            panel.grid.major = major,
+            panel.grid.minor = minor
+        )
+    } else if (grid == FALSE) {
+        ret <- ret + ggplot2::theme(
+            panel.grid = ggplot2::element_blank()
+        )
+    } else if (inherits(grid, "character")) {
+        g <- strsplit(grid, "")[[1]]
+        if ("x" %in% g) ret <- ret + ggplot2::theme(panel.grid.minor.x = minor)
+        if ("X" %in% g) ret <- ret + ggplot2::theme(panel.grid.major.x = major)
+        if ("y" %in% g) ret <- ret + ggplot2::theme(panel.grid.minor.y = minor)
+        if ("Y" %in% g) ret <- ret + ggplot2::theme(panel.grid.major.y = major)
     }
 
-  } else {
-    ret <- ret + theme(panel.grid=element_blank())
-  }
-
-
-  # Axis
-  if (inherits(axis, "character") | axis == TRUE) {
-
-    ret <- ret + theme(
-      axis.line = element_line(
-        color = "#2b2b2b",
-        size  = 0.15
-      )
-    )
-
-    if (inherits(axis, "character")) {
-      axis <- tolower(axis)
-      if (regexpr("x", axis)[1] < 0) {
-        ret <- ret + theme(
-          axis.line.x = element_blank()
-        )
-      } else {
-        ret <- ret + theme(
-          axis.line.x = element_line(
-            color = axis_col,
-            size  = 0.15
-          )
-        )
-      }
-      if (regexpr("y", axis)[1] < 0) {
-        ret <- ret + theme(
-          axis.line.y = element_blank()
-        )
-      } else {
-        ret <- ret + theme(
-          axis.line.y = element_line(
-            color = axis_col,
-            size  = 0.15
-          )
-        )
-      }
-    } else {
-      ret <- ret + theme(
-        axis.line.x = element_line(
-          color  = axis_col,
-          size   = 0.15
-        )
-      )
-
-      ret <- ret + theme(
-        axis.line.y = element_line(
-          color  = axis_col,
-          size   = 0.15
-        )
-      )
-    }
-  } else {
-    ret <- ret + theme(axis.line=element_blank())
-  }
-
-  if (!ticks) {
-    ret <- ret + theme(axis.ticks = element_blank())
-    ret <- ret + theme(axis.ticks.x = element_blank())
-    ret <- ret + theme(axis.ticks.y = element_blank())
-  } else {
-    ret <- ret + theme(axis.ticks = element_line(size=0.15))
-    ret <- ret + theme(axis.ticks.x = element_line(size=0.15))
-    ret <- ret + theme(axis.ticks.y = element_line(size=0.15))
-    ret <- ret + theme(axis.ticks.length = grid::unit(5, "pt"))
-  }
-
-  xj <- switch(
-    tolower(substr(axis_title_just, 1, 1)),
-    b=0, l=0, m=0.5, c=0.5, r=1, t=1
-  )
-
-  yj <- switch(
-    tolower(substr(axis_title_just, 2, 2)),
-    b=0, l=0, m=0.5, c=0.5, r=1, t=1
-  )
-
-  # Axis
-  ret <- ret + theme(
-    axis.text.x = element_text(
-      size = axis_text_size,
-      margin = margin(t=0)
-    )
-  )
-
-  ret <- ret + theme(
-    axis.text.y = element_text(
-      size = axis_text_size,
-      margin = margin(r=0)
-    )
-  )
-
-  ret <- ret + theme(
-    axis.title = element_text(
-      size = axis_title_size,
-      family = axis_title_family
-    )
-  )
-
-  ret <- ret + theme(
-    axis.title.x = element_text(
-      hjust  = xj,
-      size   = axis_title_size,
-      family = axis_title_family,
-      face   = axis_title_face
-    )
-  )
-
-  ret <- ret + theme(
-    axis.title.y = element_text(
-      hjust  = yj,
-      size   = axis_title_size,
-      angle  = 90,
-      family = axis_title_family,
-      face   = axis_title_face
-    )
-  )
-
-  ret <- ret + theme(
-    axis.title.y.right = element_text(
-      hjust  = yj,
-      size   = axis_title_size,
-      angle  = 90,
-      family = axis_title_family,
-      face   = axis_title_face
-    )
-  )
-
-  # Facets
-  ret <- ret + theme(
-    strip.text = element_text(
-      hjust  = 0,
-      size   = strip_text_size,
-      family = strip_text_family,
-      face   = strip_text_face
-    )
-  )
-
-  ret <- ret + theme(
-    panel.spacing = grid::unit(0.5, "lines")
-  )
-
-  # Labels
-  ret <- ret + theme(
-    plot.title = element_text(
-      hjust  = 0,
-      size   = plot_title_size,
-      margin = margin(b=plot_title_margin),
-      family = plot_title_family,
-      face   = plot_title_face
-    )
-  )
-
-  ret <- ret + theme(
-    plot.subtitle = element_text(
-      hjust  = 0,
-      size   = subtitle_size,
-      margin = margin(b=subtitle_margin),
-      family = subtitle_family,
-      face   = subtitle_face,
-      color  = subtitle_color
-    )
-  )
-
-  ret <- ret + theme(
-    plot.caption = element_text(
-      hjust  = 1,
-      size   = caption_size,
-      margin = margin(t=caption_margin),
-      family = caption_family,
-      face   = caption_face
-    )
-  )
-
-  ret <- ret + theme(
-    plot.margin = plot_margin,
-    plot.title.position = plot_title_position
-  )
-
-  if("GT Flexa" %in% extrafont::fonts()){
-    ret <- ret + theme(plot.title = element_text(size = plot_title_size, family = "GT Flexa"))
-  }else{
-    ret <- ret + theme(plot.title = element_text(size = plot_title_size, family = "Ariel"))
-  }
-
-  ret
-
+    ret
 }
-
-#' Update matching font defaults for text geoms
-#'
-#' Updates [ggplot2::geom_label] and [ggplot2::geom_text] font defaults
-#'
-#' @param family,face,size,color font family name, face, size and color
-#' @export
-update_geom_font_defaults <- function(family="Arial", face="plain", size=3.5,
-                                      color = "#2b2b2b") {
-  update_geom_defaults("text", list(family=family, face=face, size=size, color=color))
-  update_geom_defaults("label", list(family=family, face=face, size=size, color=color))
-
-}
-
-#' @rdname SegoeUISemiLight
-#' @md
-#' @title Segoe UI Semilight font name R variable aliases
-#' @description `font_an` == "`Segoe UI Semilight`"
-#' @format length 1 character vector
-#' @export
-font_an <- "Segoe UI Semilight"
-
-#' @rdname Arial
-#' @md
-#' @title Arial font name R variable aliases
-#' @description `font_an` == "`Arial`"
-#' @format length 1 character vector
-#' @export
-font_an <- "Arial"
-
-#' Fill continuous or discrete mappings with Blueprint palettes
-#'
-#' @param discrete
-#' @param palette discrete palette to be used
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-scale_fill_blueprint <- function(discrete = FALSE, palette = "default", ...) {
-
-  if(!discrete) {
-    res <- viridis::scale_fill_viridis(option = "cividis", ...)
-  } else {
-
-    if(palette == "default") {
-      discrete_palette <- blueprint_discrete_palette()
-    } else if(palette == "bold") {
-      discrete_palette <- blueprint_discrete_palette_bold()
-    } else if(palette == "blues") {
-      discrete_palette <- blueprint_discrete_palette_blues()
-    } else if(palette == "multi") {
-      discrete_palette <- blueprint_discrete_palette_multi()
-    } else {
-      stop("Invalid palette option selected")
-    }
-
-    res <- scale_fill_manual(values = discrete_palette$hex_code, ...)
-  }
-
-  res
-}
-
-
-
-#' Make it bolder
-#'
-#' @param ...
-#'
-#' @return
-#' @export
-#'
-#' @examples
-scale_fill_blueprint_bold <- function(...) {
-
-  res <- scale_fill_manual(values = blueprint_discrete_palette_bold()$hex_code, ...)
-
-  res
-
-}
-
-#blueprint_discrete_palette_blues <- function() {
-#  tibble::tribble(
-#    ~ name,   ~ r, ~ g,  ~ b, ~ hex_code,
-#    "blue_0",   0,   0,  255,  "#0000FF",
-#    "blue_1",   0, 127,  255,  "#007FFF",
-#    "blue_2", 135, 206,  250,  "#87CEFA",
-#    "blue_3", 207, 248,  255,  "#CFF8FF",
-#    "blue_4", 240, 255,  255,  "#F0FFFF",
-#    "white" , 255, 255,  255,  "#FFFFFF"
-#  )
-#}
-#
-#blueprint_discrete_palette_multi <- function() {
-#  tibble::tribble(
-#     ~ name,   ~ r, ~ g,  ~ b, ~ hex_code,
-#     "blue",   0,   0,  255,  "#0000FF",
-#    "coral", 255,  69,    0,  "#FF4500",
-#    "green",   0, 207,    0,  "#00CF97"
-#  )
-#}
-#
-#
-##' Return Blueprint discrete palette
-##'
-##' @return
-##' @export
-##'
-##' @examples
-#blueprint_discrete_palette <- function() {
-#
-#  tibble::tribble(
-#    ~ name,   ~ r, ~ g,  ~ b, ~ hex_code,
-#    "warm_1",  255, 235, 130,  "#FFEB82",
-#    "cool_1",  210, 230, 245,  "#D2E6F5",
-#    "green_1", 220, 230, 130,  "#DCE682",
-#    "warm_2",  250, 190, 120,  "#FABE78",
-#    "cool_2",  155, 185, 220,  "#9BB9DC",
-#    "green_2", 175, 190, 130,  "#AFBE82",
-#    "warm_3",  220, 150, 110,  "#DC966E"
-#  )
-#
-#}
-#
-#
-##' Return Blueprint discrete palette bold
-##'
-##' @return
-##' @export
-##'
-##' @examples
-#blueprint_discrete_palette_bold <- function() {
-#
-#  tibble::tribble(
-#    ~ name,        ~ r, ~ g,  ~ b, ~ hex_code,
-#    "dark_slate",   75, 105,  145,  "#4B6991",
-#    "tomato",      225, 135,   25,  "#E18719",
-#    "light_green", 193, 213,  103,  "#C1D567",
-#    "dark_grey",   127, 127,  127,  "#7F7F7F"
-#  )
-#
-#}
-#
-load_fonts <- function() {
-
-  if(!fonts_are_loaded()) {
-    extrafont::font_import(pattern = "segoeuisl|consola.ttf|rial|GT Flexa")
-  }
-
-  extrafont::loadfonts(device = "pdf", quiet = TRUE)
-  extrafont::loadfonts(device = "win", quiet = TRUE)
-  extrafont::loadfonts(device = "postscript", quiet = TRUE)
-}
-
-fonts_are_loaded <- function() {
-  fonts <- extrafont::fonts()
-  res <- "Segoe UI Semilight" %in% fonts & "Consolas" %in% fonts & "Arial" %in% fonts  & "GT Flexa" %in% fonts
-
-  res
-}
-
-
-
-#
-#
-#
-# bdp_2 <- blueprint_discrete_palette %>%
-#   dplyr::group_by(name) %>%
-#   tidyr::nest() %>%
-#   dplyr::mutate(
-#     hex = data %>%
-#       map_chr(
-#       ~ rgb(.x$r, .x$g, .x$b, maxColorValue=255)
-#       )
-#   )
-#
-#
-# rgb_vec <- function(x) {
-#
-#   names(x) <- c("red", "green", "blue")
-#
-#   rgb(!!!x, maxColorValue = 255)
-#
-# }
-
-
-
