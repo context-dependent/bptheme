@@ -19,15 +19,16 @@ LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports:
-    tibble (>= 3.2.1),
     ggplot2 (>= 3.4.2),
     showtext (>= 0.9.5),
-    withr (>= 2.5.0)
+    sysfonts (>= 0.8.8)
 Depends:
     R (>= 2.10)
 Suggests:
     bpscales,
-    testthat (>= 3.0.0)
+    testthat (>= 3.0.0),
+    tibble (>= 3.2.1),
+    withr (>= 2.5.0)
 Remotes:
     context-dependent/bpscales
 Config/testthat/edition: 3

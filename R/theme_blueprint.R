@@ -5,6 +5,10 @@
 #'   Character String indicating the default font family for text on the plot.
 #' @param base_size
 #'   Number indicating the default point size for text on the plot.
+#' @param plot_background_color
+#'   Character String indicating the background colour for the plot.
+#' @param plot_title_position
+#'   Argument passed to \code{ggplot::theme(plot.title.position)}
 #' @param plot_title_family
 #'   Character String indicating the font family for the plot's title.
 #' @param plot_title_size
