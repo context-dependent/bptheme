@@ -1,25 +1,34 @@
 Package: bptheme
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1.0
-Author: Who wrote it
-Maintainer: The package maintainer <yourself@somewhere.net>
-Description: More about what it does (maybe more than one line)
-    Use four spaces when indenting paragraphs within the Description.
-License: What license is it under?
+Title: Flexible theme for Blueprint plots
+Version: 0.2.0
+Authors@R:
+    c(
+        person(
+            "Thomas", "McManus",
+            email = "thomas.keith.mcmanus@gmail.com",
+            role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0005-0839-3018")
+        ),
+        person("Alex", "Rand", role = c("ctb"))
+    )
+Description: Graphic standards for fonts, axes, grids, shapes, etc.
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.1.1
-Imports: 
-    magrittr,
-    tibble,
-    dplyr,
-    purrr,
-    ggplot2,
-    scales,
-    tidyr,
-    extrafont
-Depends: 
+RoxygenNote: 7.2.3
+Imports:
+    ggplot2 (>= 3.4.2),
+    showtext (>= 0.9.5),
+    sysfonts (>= 0.8.8)
+Depends:
     R (>= 2.10)
-
+Suggests:
+    bpscales,
+    testthat (>= 3.0.0),
+    tibble (>= 3.2.1),
+    withr (>= 2.5.0)
+Remotes:
+    context-dependent/bpscales
+Config/testthat/edition: 3

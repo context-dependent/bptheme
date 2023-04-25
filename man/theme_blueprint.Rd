@@ -2,20 +2,27 @@
 % Please edit documentation in R/theme_blueprint.R
 \name{theme_blueprint}
 \alias{theme_blueprint}
-\title{Theme a ggplot according to Blueprint-ADE legacy corporate standards}
+\alias{base_theme}
+\alias{style_labels}
+\alias{style_axes}
+\alias{style_grid}
+\alias{theme_blueprint_2021}
+\title{Flexible theme with sensible defaults for Blueprint-branded
+plots}
 \usage{
 theme_blueprint(
-  base_family = "Segoe UI Semilight",
+  base_family = "Arial",
   base_size = 11.5,
-  plot_title_family = "Segoe UI Semilight",
+  plot_title_family = "GT Flexa",
   plot_title_size = 18,
   plot_title_face = "plain",
   plot_title_margin = 10,
   plot_title_position = "plot",
+  plot_background_color = "#E6E6E6",
   subtitle_family = "Consolas",
   subtitle_size = 12,
-  subtitle_face = "plain",
   subtitle_margin = 15,
+  subtitle_face = "plain",
   subtitle_color = "grey60",
   strip_text_family = base_family,
   strip_text_size = 12,
@@ -29,20 +36,202 @@ theme_blueprint(
   axis_title_size = base_size,
   axis_title_face = "plain",
   axis_title_just = "rt",
-  plot_margin = margin(30, 30, 30, 30),
+  plot_margin = ggplot2::margin(5, 5, 5, 5),
   grid_col = "grey50",
   grid = TRUE,
   axis_col = "grey30",
   axis = TRUE,
-  ticks = FALSE
+  ticks = FALSE,
+  legend_position = "b"
+)
+
+base_theme(base_family, base_size, plot_background_color)
+
+style_labels(
+  plot_title_family,
+  plot_title_size,
+  plot_title_face,
+  plot_title_margin,
+  plot_title_position,
+  subtitle_family,
+  subtitle_size,
+  subtitle_face,
+  subtitle_margin,
+  subtitle_color,
+  strip_text_family,
+  strip_text_size,
+  strip_text_face,
+  caption_family,
+  caption_size,
+  caption_face,
+  caption_margin,
+  plot_margin,
+  legend_position
+)
+
+style_axes(
+  axis,
+  axis_text_size,
+  axis_title_family,
+  axis_title_size,
+  axis_title_face,
+  axis_title_just,
+  axis_col,
+  ticks
+)
+
+style_grid(grid, grid_col)
+
+theme_blueprint_2021(
+  base_family = "Arial",
+  base_size = 11.5,
+  plot_title_family = "GT Flexa",
+  plot_title_size = 18,
+  plot_title_face = "plain",
+  plot_title_margin = 10,
+  plot_title_position = "plot",
+  plot_background_color = "#E6E6E6",
+  subtitle_family = "Consolas",
+  subtitle_size = 12,
+  subtitle_margin = 15,
+  subtitle_face = "plain",
+  subtitle_color = "grey60",
+  strip_text_family = base_family,
+  strip_text_size = 12,
+  strip_text_face = "plain",
+  caption_family = base_family,
+  caption_size = 9,
+  caption_face = "italic",
+  caption_margin = 10,
+  axis_text_size = base_size,
+  axis_title_family = base_family,
+  axis_title_size = base_size,
+  axis_title_face = "plain",
+  axis_title_just = "rt",
+  plot_margin = ggplot2::margin(5, 5, 5, 5),
+  grid_col = "grey50",
+  grid = TRUE,
+  axis_col = "grey30",
+  axis = TRUE,
+  ticks = FALSE,
+  legend_position = "b"
 )
 }
 \arguments{
-\item{ticks}{}
+\item{base_family}{Character String indicating the default font family for text on the plot.}
+
+\item{base_size}{Number indicating the default point size for text on the plot.}
+
+\item{plot_title_family}{Character String indicating the font family for the plot's title.}
+
+\item{plot_title_size}{Number indicating the point size for the plot's title.}
+
+\item{plot_title_face}{Character String specifying the font face (e.g. "bold", "semibold")
+for the plot's title.}
+
+\item{plot_title_margin}{Number indicating the pixel size of the margin around the plot's title.}
+
+\item{plot_title_position}{Argument passed to \code{ggplot::theme(plot.title.position)}}
+
+\item{plot_background_color}{Character String indicating the background colour for the plot.}
+
+\item{subtitle_family}{Character String indicating the font family for the plot's subtitle.}
+
+\item{subtitle_size}{Number indicating the point size of the plot's subtitle.}
+
+\item{subtitle_margin}{Number indicating the pixel size of the margin around the plot's subtitle.}
+
+\item{subtitle_face}{Character String specifying the font face (e.g. "bold", "semibold")
+for the plot's subtitle.}
+
+\item{subtitle_color}{Character String specifying the color for the plot's subtitle.}
+
+\item{strip_text_family}{Character String indicating the font family for the plot's facet labels.}
+
+\item{strip_text_size}{Number indicating the point size for the plot's facet labels.}
+
+\item{strip_text_face}{Character String specifying the font face (e.g. "bold", "semibold")
+for the plot's facet labels.}
+
+\item{caption_family}{Character String indicating the font family for the plot's caption.}
+
+\item{caption_size}{Number indicating the point size for the plot's caption.}
+
+\item{caption_face}{Character String specifying the font face (e.g. "bold", "semibold")
+for the plot's caption.}
+
+\item{caption_margin}{Number indicating the pixel size of the margin around the plot's caption.}
+
+\item{axis_text_size}{Number indicating the point size for the plot's axis text.}
+
+\item{axis_title_family}{Character String indicating the font family for the plot's axis title(s).}
+
+\item{axis_title_size}{Number indicating the point size for the plot's axis title(s).}
+
+\item{axis_title_face}{Character String specifying the font face (e.g. "bold", "semibold")
+for the plot's title.}
+
+\item{axis_title_just}{Two-Character String indicating justification for the plots axis title(s).
+The first character controls x axis, while the second controls y.
+Each character can be one of the following:
+\itemize{
+\item "r" right justify the axis title
+\item "l" left justify the axis title
+\item "c" center justify the axis title
+\item "t" top justify the axis title if it is vertically oriented
+\item "b" bottom justify the axis title if it is vertically oriented
+\item "m" middle justify the axis title if it is vertically oriented
+}}
+
+\item{plot_margin}{Number indicating the margin in pixels around the plot's content}
+
+\item{grid_col}{Character String specifying the colour of the grid}
+
+\item{grid}{Character String (up to 4 characters from "XxYy") or Logical alias
+which toggles major and minor gridlines.
+
+Behavior depends on which characters among "XxYy" are in the string:
+\itemize{
+\item "X" include major vertical gridlines
+\item "x" include minor vertical gridlines
+\item "Y" include major horizontal gridlines
+\item "y" include minor horizontal gridlines
+}
+
+Logical aliases:
+\itemize{
+\item TRUE is "XxYy"
+\item FALSE is ""
+}}
+
+\item{axis_col}{Character String indicating the colour of the axis lines}
+
+\item{axis}{Character String (up to 2 from "xy") or Logical alias
+which toggles axis lines.
+
+One of:
+\itemize{
+\item "xy" or TRUE draw both x and y axis lines
+\item "x" draw x axis line but not y
+\item "y" draw y axis line but not x
+\item "" or FALSE don't draw axis lines
+}}
+
+\item{ticks}{Logical if TRUE, draw ticks for each break in the x and y axes.}
+
+\item{legend_position}{Character String indicating the position of the legend.
+Passed directly to \code{ggplot2::theme(legend.position)}
+
+One of:
+\itemize{
+\item "r" position the legend on the right
+\item "b" position the legend on the bottom
+}}
 }
 \value{
-
+\code{theme_blueprint} returns a ggplot2 theme object
 }
 \description{
-Theme a ggplot according to Blueprint-ADE legacy corporate standards
+Flexible theme with sensible defaults for Blueprint-branded
+plots
 }
