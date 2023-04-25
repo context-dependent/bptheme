@@ -1,7 +1,7 @@
 Package: bptheme
 Type: Package
 Title: Flexible theme for Blueprint plots
-Version: 0.1.0
+Version: 0.2.0
 Author:
     person("Thomas", "McManus", "thomas.keith.mcmanus@gmail.com", role = c("aut", "cre"),
            comment = c(ORCID = "0009-0005-0839-3018"))
