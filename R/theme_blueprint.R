@@ -120,7 +120,7 @@ theme_blueprint <- function(
     plot_title_position = "plot",
     plot_background_color = "#E6E6E6",
     subtitle_family = "Consolas", subtitle_size = 12,
-    subtitle_face = "plain", subtitle_margin = 15,
+    subtitle_margin = 15,
     subtitle_color = "grey60",
     strip_text_family = base_family, strip_text_size = 12,
     strip_text_face = "plain",
@@ -236,7 +236,6 @@ style_labels <- function(
             size   = subtitle_size,
             margin = ggplot2::margin(b = subtitle_margin),
             family = subtitle_family,
-            face   = subtitle_face,
             color  = subtitle_color
         ),
         plot.caption = ggplot2::element_text(
