@@ -45,7 +45,12 @@ d |>
     y = "Bill Depth (mm)",
     fill = "Species"
   ) +
-  theme_blueprint()
+  theme_blueprint() +
+  scale_fill_blueprint(
+    discrete = TRUE,
+    type = "multi", option = "spectrum",
+    begin = .25, end = .75
+  )
 #> Warning: Removed 2 rows containing missing values (`geom_point()`).
 ```
 

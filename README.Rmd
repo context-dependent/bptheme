@@ -5,7 +5,7 @@ output: github_document
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 ```{r, include = FALSE}
-ragg_png <- function(..., res = 192) {
+ragg_png <- function(..., res = 300) {
   ragg::agg_png(..., res = res, units = "in")
 }
 knitr::opts_chunk$set(
@@ -13,7 +13,8 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "man/figures/README-",
   out.width = "100%",
-  dev = "ragg_png", fig.ext = "png"
+  dev = "ragg_png",
+  fig.ext = "png"
 )
 ```
 
@@ -56,5 +57,10 @@ d |>
     y = "Bill Depth (mm)",
     fill = "Species"
   ) +
-  theme_blueprint()
+  theme_blueprint() +
+  scale_fill_blueprint(
+    discrete = TRUE,
+    type = "multi", option = "spectrum",
+    begin = .25, end = .75
+  )
 ```

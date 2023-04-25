@@ -129,7 +129,7 @@ theme_blueprint <- function(
     axis_text_size = base_size,
     axis_title_family = base_family, axis_title_size = base_size,
     axis_title_face = "plain", axis_title_just = "rt",
-    plot_margin = ggplot2::margin(30, 30, 30, 30),
+    plot_margin = ggplot2::margin(5, 5, 5, 5),
     grid_col = "grey50", grid = TRUE,
     axis_col = "grey30", axis = TRUE, ticks = FALSE,
     legend_position = "b") {

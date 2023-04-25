@@ -21,9 +21,6 @@ install_deps:
 
 install: build
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
-	Rscript \
-	-e 'sysfonts::font_add("GT Flexa", "fonts/GT-Flexa-Standard-Regular-Italic.ttf")' \
-	-e 'sysfonts::font_add("Arial", "fonts/arial.ttf")'
 
 clean:
 	@rm -rf $(PKGNAME)_$(PKGVERS).tar.gz $(PKGNAME).Rcheck
