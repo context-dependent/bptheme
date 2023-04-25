@@ -120,7 +120,7 @@ theme_blueprint <- function(
     plot_title_position = "plot",
     plot_background_color = "#E6E6E6",
     subtitle_family = "Consolas", subtitle_size = 12,
-    subtitle_margin = 15,
+    subtitle_margin = 15, subtitle_face = "plain",
     subtitle_color = "grey60",
     strip_text_family = base_family, strip_text_size = 12,
     strip_text_face = "plain",
