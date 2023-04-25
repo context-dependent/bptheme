@@ -27,11 +27,7 @@ devtools::install_github("context-dependent/bptheme")
 library(bptheme)
 library(bpscales)
 library(ggplot2)
-library(showtext)
-#> Loading required package: sysfonts
-#> Loading required package: showtextdb
 library(palmerpenguins)
-## basic example code
 
 d <- penguins
 
