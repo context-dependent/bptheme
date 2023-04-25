@@ -40,12 +40,12 @@ devtools::install_github("context-dependent/bptheme")
 library(bptheme)
 library(bpscales)
 library(ggplot2)
+library(showtext)
 library(palmerpenguins)
 ## basic example code
 
 d <- penguins
 
-showtext::showtext_begin()
 d |>
   ggplot(aes(bill_length_mm, bill_depth_mm)) +
   geom_point(
@@ -55,5 +55,4 @@ d |>
   ) +
   theme_blueprint() +
   scale_fill_blueprint(discrete = TRUE)
-showtext::showtext_end()
 ```

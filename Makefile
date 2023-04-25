@@ -17,11 +17,13 @@ check: build
 install_deps:
 	Rscript \
 	-e 'if (!requireNamespace("remotes")) install.packages("remotes")' \
-	-e 'remotes::install_deps(dependencies = TRUE)' \
-	-e 'sysfonts::font_add("GT Flexa", "fonts/GT-Flexa-Standard-Regular-Italic.ttf")'
+	-e 'remotes::install_deps(dependencies = TRUE)'
 
 install: build
 	R CMD INSTALL $(PKGNAME)_$(PKGVERS).tar.gz
+	Rscript \
+	-e 'sysfonts::font_add("GT Flexa", "fonts/GT-Flexa-Standard-Regular-Italic.ttf")' \
+	-e 'sysfonts::font_add("Arial", "fonts/arial.ttf")'
 
 clean:
 	@rm -rf $(PKGNAME)_$(PKGVERS).tar.gz $(PKGNAME).Rcheck
