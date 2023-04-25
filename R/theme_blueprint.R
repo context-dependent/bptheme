@@ -98,6 +98,15 @@
 #'   }
 #' @param ticks
 #'   Logical if TRUE, draw ticks for each break in the x and y axes.
+#' @param legend_position
+#'   Character String indicating the position of the legend.
+#'   Passed directly to \code{ggplot2::theme(legend.position)}
+#'
+#'   One of:
+#'   \itemize{
+#'     \item "r" position the legend on the right
+#'     \item "b" position the legend on the bottom
+#'   }
 #'
 #' @return
 #'   \code{theme_blueprint} returns a ggplot2 theme object
@@ -122,7 +131,8 @@ theme_blueprint <- function(
     axis_title_face = "plain", axis_title_just = "rt",
     plot_margin = ggplot2::margin(30, 30, 30, 30),
     grid_col = "grey50", grid = TRUE,
-    axis_col = "grey30", axis = TRUE, ticks = FALSE) {
+    axis_col = "grey30", axis = TRUE, ticks = FALSE,
+    legend_position = "b") {
     ret <- base_theme(base_family, base_size, plot_background_color)
     ret <- ret + style_grid(grid, grid_col)
     ret <- ret + style_axes(
@@ -170,7 +180,8 @@ base_theme <- function(base_family, base_size, plot_background_color) {
                 fill = plot_background_color,
                 colour = plot_background_color
             ),
-            panel.spacing = grid::unit(0.5, "lines")
+            panel.spacing = grid::unit(0.5, "lines"),
+            legend.background = ggplot2::element_blank()
         )
 }
 
@@ -193,7 +204,8 @@ style_labels <- function(
     caption_size,
     caption_face,
     caption_margin,
-    plot_margin) {
+    plot_margin,
+    legend_position) {
     # Facets
     ret <- ggplot2::theme(
         strip.text = ggplot2::element_text(
@@ -235,7 +247,9 @@ style_labels <- function(
             face   = caption_face
         ),
         plot.margin = plot_margin,
-        plot.title.position = plot_title_position
+        plot.title.position = plot_title_position,
+        legend.key = ggplot2::element_blank(),
+        legend.position = "bottom"
     )
 
     ret
@@ -257,7 +271,8 @@ style_axes <- function(
 
     if (axis == TRUE) {
         ret <- ret + ggplot2::theme(
-            axis.line = axis_line
+            axis.line.x = axis_line,
+            axis.line.y = axis_line
         )
     } else if (inherits(axis, "character")) {
         if (grepl("x", axis)) {
@@ -320,14 +335,14 @@ style_axes <- function(
         axis.title.y = ggplot2::element_text(
             hjust  = yj,
             size   = axis_title_size,
-            angle  = 90,
+            angle  = 0,
             family = axis_title_family,
             face   = axis_title_face
         ),
         axis.title.y.right = ggplot2::element_text(
             hjust  = yj,
             size   = axis_title_size,
-            angle  = 90,
+            angle  = 0,
             family = axis_title_family,
             face   = axis_title_face
         )
@@ -369,3 +384,7 @@ style_grid <- function(grid, grid_col) {
 
     ret
 }
+
+#' @rdname theme_blueprint
+#' @aliases theme_blueprint
+theme_blueprint_2021 <- theme_blueprint

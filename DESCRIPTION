@@ -2,13 +2,16 @@ Package: bptheme
 Type: Package
 Title: Flexible theme for Blueprint plots
 Version: 0.2.0
-Author:
-    person("Thomas", "McManus", "thomas.keith.mcmanus@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0009-0005-0839-3018"))
-    person("Alex", "Rand", role = c("aut"))
-Maintainer:
-    person("Thomas", "McManus", "thomas.keith.mcmanus@gmail.com", role = c("aut", "cre"),
-           comment = c(ORCID = "0009-0005-0839-3018"))
+Authors@R:
+    c(
+        person(
+            "Thomas", "McManus",
+            email = "thomas.keith.mcmanus@gmail.com",
+            role = c("aut", "cre"),
+           comment = c(ORCID = "0009-0005-0839-3018")
+        ),
+        person("Alex", "Rand", role = c("ctb"))
+    )
 Description: Graphic standards for fonts, axes, grids, shapes, etc.
 License: MIT + file LICENSE
 Encoding: UTF-8
@@ -23,5 +26,6 @@ Imports:
 Depends:
     R (>= 2.10)
 Suggests:
+    bpscales,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
